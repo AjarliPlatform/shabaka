@@ -1,9 +1,10 @@
 const easy = levels[0];
 let level = easy, puzzle, solution, boardState, notes, selected = null, picked = 0;
 let done = false, noteMode = false, forbidMode = false, checks = 3, reveal = false, seconds = 0, clock = null, history = [], finished = 0;
-let litLines = new Set(), muted = false, audio = null, restartTimer = null;
+let litLines = new Set(), muted = false, audio = null;
 const board = document.getElementById("board");
-const ar = value => String(value).padStart(2, "0").replace(/\d/g, digit => "٠١٢٣٤٥٦٧٨٩"[digit]);
+const num = value => String(value).replace(/\d/g, digit => "٠١٢٣٤٥٦٧٨٩"[digit]);
+const ar = value => num(String(value).padStart(2, "0"));
 
 function tone(freq, at, length, volume) {
   if (muted) return;
@@ -33,7 +34,7 @@ function startLevel(next) {
   level = next; puzzle = next.puzzle.map(row => row.slice()); solution = next.solution;
   boardState = puzzle.map(row => row.slice());
   notes = Array.from({length:9}, () => Array.from({length:9}, () => ({yes:new Set(), no:new Set()})));
-  clearTimeout(restartTimer); selected = null; picked = 0; done = false; checks = 3; reveal = false; seconds = 0; history = []; litLines = new Set();
+  selected = null; picked = 0; done = false; checks = 3; reveal = false; seconds = 0; history = []; litLines = new Set();
   clearInterval(clock); clock = setInterval(() => { if (!done) { seconds++; renderStatus(); } }, 1000);
   document.getElementById("level-name").textContent = next.name;
   document.getElementById("hint").textContent = "اختار خانة، وبعدين رقم.";
@@ -47,7 +48,8 @@ function renderStatus() {
 }
 function renderLevels() {
   document.getElementById("levels-list").innerHTML = levels.map((item, index) => `<button class="level" data-level="${index}" ${item.open ? "" : "disabled"}><span><b>${item.name}</b><small>${item.open ? `${item.clues} رقم ظاهر` : item.note}</small></span><span>${item.open ? "ابدأ" : "مقفول"}</span></button>`).join("");
-  document.getElementById("session").textContent = finished ? `خلّصت ${ar(finished)} في الجلسة دي` : "سهل يفتح دلوقتي.";
+  const open = levels.filter(item => item.open).length;
+  document.getElementById("session").textContent = finished ? `خلّصت ${num(finished)} في الجلسة دي` : `${num(open)} مستويات مفتوحة دلوقتي.`;
 }
 function render() {
   board.innerHTML = "";
@@ -96,7 +98,7 @@ function place(n) {
   const filled = boardState.every(row => row.every(Boolean));
   const correct = boardState.every((row, rr) => row.every((value, cc) => value === solution[rr][cc]));
   if (filled && correct) win();
-  else if (filled) restartWrong();
+  else if (filled) fullButWrong();
 }
 function undo() {
   const previous = history.pop(); if (!previous || done) return;
@@ -107,7 +109,7 @@ function undo() {
 }
 function win() {
   done = true; finished++; clearInterval(clock); finishSound();
-  document.getElementById("win-time").textContent = `الوقت ${document.getElementById("timer").textContent} · خلّصت ${ar(finished)} في الجلسة`;
+  document.getElementById("win-time").textContent = `الوقت ${document.getElementById("timer").textContent} · خلّصت ${num(finished)} في الجلسة`;
   document.getElementById("mini-board").innerHTML = boardState.flat().map((value, index) => `<i class="r${(index / 9 | 0) + 1} c${index % 9 + 1}">${value}</i>`).join("");
   const confetti = document.getElementById("confetti");
   confetti.innerHTML = Array.from({length:26}, (_, index) => `<b style="--x:${8 + (index * 37) % 86}%;--d:${index % 7 * .08}s;--r:${index % 2 ? 1 : -1}"></b>`).join("");
@@ -117,13 +119,12 @@ function inspectBoard() {
   if (!checks || done) return;
   checks--; reveal = true;
   const wrong = boardState.flat().filter((value, index) => value && value !== solution[index / 9 | 0][index % 9]).length;
-  document.getElementById("hint").textContent = wrong ? `فيه ${ar(wrong)} خارج مكانه.` : "اللي كتبته لحد دلوقتي سليم.";
+  document.getElementById("hint").textContent = wrong ? `فيه ${num(wrong)} خارج مكانه.` : "اللي كتبته لحد دلوقتي سليم.";
   render();
 }
-function restartWrong() {
-  done = true; clearInterval(clock);
-  document.getElementById("hint").textContent = "أنت مخطئ. امسح وابدأ من جديد.";
-  restartTimer = setTimeout(() => startLevel(level), 900);
+function fullButWrong() {
+  document.getElementById("hint").textContent = "الشبكة اتملت بس فيها غلط. دوّر عليه أو استخدم الفحص.";
+  board.classList.remove("shake"); void board.offsetWidth; board.classList.add("shake");
 }
 function show(name) {
   document.querySelectorAll(".screen").forEach(screen => screen.classList.toggle("on", screen.id === name));
@@ -170,6 +171,6 @@ document.getElementById("clear-notes").onclick = () => {
   render();
 };
 document.getElementById("sound").onclick = () => { muted = !muted; const button = document.getElementById("sound"); button.classList.toggle("off", muted); button.textContent = muted ? "×" : "♪"; button.setAttribute("aria-label", muted ? "تشغيل الصوت" : "كتم الصوت"); };
-document.getElementById("back").onclick = () => { clearTimeout(restartTimer); clearInterval(clock); done = true; show("levels"); };
+document.getElementById("back").onclick = () => { clearInterval(clock); done = true; show("levels"); };
 document.getElementById("again").onclick = () => { document.getElementById("veil").classList.remove("on"); renderLevels(); show("levels"); };
 renderLevels();
