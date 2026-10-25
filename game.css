@@ -1,16 +1,18 @@
 :root { --ink:#2b241c; --muted:#7a6d5d; --card:#fffaf3; --line:#e4d7c4; --clay:#c46a45; --shadow:0 14px 34px rgba(74,52,30,.10); }
 * { box-sizing:border-box; } html,body { margin:0; height:100%; overflow:hidden; }
-body { font-family:"Segoe UI",Tahoma,"Noto Naskh Arabic",sans-serif; color:var(--ink); background:linear-gradient(160deg,#f8f2e7,#efe3d1); }
+body { font-family:"Baloo 2","Baloo Bhaijaan 2",system-ui,"Segoe UI",Tahoma,sans-serif; color:var(--ink); background:linear-gradient(160deg,#f8f2e7,#efe3d1); }
 button,.cell { font:inherit; } button { touch-action:manipulation; border:0; background:none; color:inherit; cursor:pointer; }
 .phone { width:min(430px,100%); height:100dvh; margin:auto; padding:8px 10px 8px; overflow:hidden; display:flex; flex-direction:column; }
 .top,.status,.tools,.brand { display:flex; align-items:center; } .top,.status { justify-content:space-between; } .brand,.tools { gap:8px; }
-.top { margin-bottom:6px; } .mark,.back,.sound { width:34px; height:34px; border-radius:12px; background:#fff8ee; border:1px solid var(--line); }
+.top { margin-bottom:6px; } [dir="rtl"] .back { transform:scaleX(-1); }
+#lang { height:34px; max-width:96px; border-radius:12px; background:#fff8ee; border:1px solid var(--line); color:inherit; font:inherit; font-size:12px; padding:0 6px; }
+.mark,.back,.sound { width:34px; height:34px; border-radius:12px; background:#fff8ee; border:1px solid var(--line); }
 .mark { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:6px; } .mark i { border-radius:2px; background:#d7c4aa; }
 .mark i:nth-child(1),.mark i:nth-child(5),.mark i:nth-child(9) { background:var(--clay); }
 h1 { margin:0; font-size:22px; line-height:1; } .eyebrow,.status span { color:var(--muted); font-size:11px; white-space:nowrap; }
 .screen { display:none; } .screen.on { display:block; } #play.on { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
 #levels { overflow:auto; } .hero,.level { background:var(--card); border:1px solid #eadcc8; border-radius:18px; } .hero { padding:14px; } .hero h2 { margin:8px 0 3px; font-size:20px; }
-.levels { display:grid; gap:7px; margin-top:10px; } .level { width:100%; padding:10px 12px; display:flex; justify-content:space-between; } .level:disabled { color:#a89886; }
+.levels { display:grid; gap:7px; margin-top:10px; } .level { width:100%; padding:10px 12px; display:flex; justify-content:space-between; align-items:center; gap:12px; text-align:start; } .level > span:first-child { display:grid; gap:1px; } .level small { color:var(--muted); line-height:1.4; } .level:disabled { color:#a89886; }
 .status { margin-bottom:5px; gap:6px; } .status strong { font-size:15px; }
 #check { min-height:30px; border-radius:999px; padding:0 10px; background:#fffaf3; border:1px solid #c46a45; color:#a65332; font-size:12px; font-weight:750; }
 #check:disabled { color:#b7a898; border-color:var(--line); }
@@ -38,7 +40,7 @@ h1 { margin:0; font-size:22px; line-height:1; } .eyebrow,.status span { color:va
 .veil { position:fixed; inset:0; background:rgba(47,36,24,.28); display:none; align-items:end; justify-content:center; } .veil.on { display:flex; }
 .sheet { width:min(430px,100%); background:#fffaf3; border-radius:28px 28px 0 0; padding:18px; } .sheet h2,.sheet .lead { text-align:center; }
 .seal { width:52px; height:52px; margin:auto; border-radius:18px; background:#f4e7d3; display:grid; place-items:center; } .play { width:100%; min-height:46px; border-radius:16px; background:var(--clay); color:white; font-weight:750; }
-.roof { margin:6px 0 0; text-align:center; color:#a65332; font-weight:800; letter-spacing:.5px; }
+.roof { margin:6px 0 0; text-align:center; color:#a65332; font-weight:800; letter-spacing:.5px; } :lang(ar) .roof { letter-spacing:0; }
 .sheet { animation:rise .42s cubic-bezier(.2,1.2,.3,1); } @keyframes rise { from { transform:translateY(28px); } }
 .confetti { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
 .confetti b { position:absolute; top:-12px; left:var(--x); width:8px; height:12px; border-radius:3px; background:#c46a45; animation:burst 1.35s var(--d) ease-in forwards; }

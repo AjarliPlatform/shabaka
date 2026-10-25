@@ -1,34 +1,41 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f3eadb">
-<title>شبكة</title>
+<title>Nineling</title>
+<link rel="icon" href="brand/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts/fonts.css">
 <link rel="stylesheet" href="game.css">
 </head>
 <body>
 <main class="phone">
   <header class="top">
-    <div class="brand"><div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div><h1>شبكة</h1><p class="eyebrow" id="crumb">اختار مستوى</p></div></div>
-    <div class="tools"><button class="back" id="back" hidden aria-label="رجوع">‹</button><button class="sound" id="sound" aria-label="كتم الصوت">♪</button></div>
+    <div class="brand"><div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div><h1 dir="ltr">Nineling</h1><p class="eyebrow" id="crumb"></p></div></div>
+    <div class="tools"><select id="lang" data-i18n-aria="nav.language"></select><button class="back" id="back" hidden data-i18n-aria="nav.back">‹</button><button class="sound" id="sound">♪</button></div>
   </header>
   <section class="screen on" id="levels">
-    <div class="hero"><span class="chip">شبكة</span><h2>اختار مستوى وابدأ.</h2><p>كل مستوى له حل واحد.</p></div>
+    <div class="hero"><span class="chip" data-i18n="home.chip"></span><h2 data-i18n="home.title"></h2><p data-i18n="home.sub"></p></div>
     <div class="levels" id="levels-list"></div>
     <p class="session" id="session"></p>
   </section>
   <section class="screen" id="play">
-    <div class="status"><strong id="level-name">سهل</strong><span id="timer">٠٠:٠٠</span><button id="check">افحص · ٣</button></div>
-    <div class="board-wrap"><div class="board" id="board"></div></div>
-    <p class="hint" id="hint">اختار خانة، وبعدين رقم.</p>
-    <div class="note-row"><button id="notes">ملاحظات</button><button id="forbid">ممنوع</button></div>
-    <div class="actions"><button id="undo">تراجع</button><button id="clear-notes">امسح الملاحظات</button><button id="erase">مسح</button></div>
-    <div class="pad" id="pad"></div>
+    <div class="status"><strong id="level-name"></strong><span id="timer"></span><button id="check"></button></div>
+    <div class="board-wrap"><div class="board" id="board" dir="ltr"></div></div>
+    <p class="hint" id="hint" aria-live="polite"></p>
+    <div class="note-row"><button id="notes" data-i18n="play.notes"></button><button id="forbid" data-i18n="play.forbid"></button></div>
+    <div class="actions"><button id="undo" data-i18n="play.undo"></button><button id="clear-notes" data-i18n="play.clearNotes"></button><button id="erase" data-i18n="play.erase"></button></div>
+    <div class="pad" id="pad" dir="ltr"></div>
   </section>
 </main>
-	<div class="veil" id="veil"><div class="confetti" id="confetti" aria-hidden="true"></div><div class="sheet"><div class="seal">✦</div><p class="roof">تسقيف</p><h2>الشبكة اتقفلت</h2><p class="lead" id="win-time"></p><div class="mini-board" id="mini-board"></div><button class="play" id="again">لغز جديد</button></div></div>
-<script src="levels.js"></script>
-<script src="game.js"></script>
+<div class="veil" id="veil"><div class="confetti" id="confetti" aria-hidden="true"></div><div class="sheet"><div class="seal">✦</div><p class="roof" data-i18n="win.roof"></p><h2 data-i18n="win.title"></h2><p class="lead" id="win-time"></p><div class="mini-board" id="mini-board" dir="ltr"></div><button class="play" id="again" data-i18n="win.again"></button></div></div>
+<script src="js/i18n.js"></script>
+<script src="locales/en.js"></script>
+<script src="locales/ar.js"></script>
+<script src="js/sudoku.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
