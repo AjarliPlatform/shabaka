@@ -1,6 +1,6 @@
 const easy = levels[0];
 let level = easy, puzzle, solution, boardState, notes, selected = null, picked = 0;
-let done = false, noteMode = false, checks = 3, reveal = false, seconds = 0, clock = null, history = [], finished = 0;
+let done = false, noteMode = false, forbidMode = false, checks = 3, reveal = false, seconds = 0, clock = null, history = [], finished = 0;
 let litLines = new Set(), muted = false, audio = null;
 const board = document.getElementById("board");
 const ar = value => String(value).padStart(2, "0").replace(/\d/g, digit => "٠١٢٣٤٥٦٧٨٩"[digit]);
@@ -30,7 +30,7 @@ function lineComplete(index, row) {
 function startLevel(next) {
   level = next; puzzle = next.puzzle.map(row => row.slice()); solution = next.solution;
   boardState = puzzle.map(row => row.slice());
-  notes = Array.from({length:9}, () => Array.from({length:9}, () => new Set()));
+  notes = Array.from({length:9}, () => Array.from({length:9}, () => ({yes:new Set(), no:new Set()})));
   selected = null; picked = 0; done = false; checks = 3; reveal = false; seconds = 0; history = []; litLines = new Set();
   clearInterval(clock); clock = setInterval(() => { if (!done) { seconds++; renderStatus(); } }, 1000);
   document.getElementById("level-name").textContent = next.name;
@@ -54,7 +54,7 @@ function render() {
     const here = boardState[r][c];
     button.className = `cell r${r + 1} c${c + 1}${puzzle[r][c] ? " given" : ""}`;
     button.setAttribute("aria-label", `صف ${r + 1} عمود ${c + 1}`);
-    if (!here && notes[r][c].size) button.innerHTML = `<span class="notes">${[1,2,3,4,5,6,7,8,9].map(n => `<i>${notes[r][c].has(n) ? n : ""}</i>`).join("")}</span>`;
+    if (!here && (notes[r][c].yes.size || notes[r][c].no.size)) button.innerHTML = `<span class="notes">${[1,2,3,4,5,6,7,8,9].map(n => `<i class="${notes[r][c].no.has(n) ? "no" : ""}">${notes[r][c].yes.has(n) || notes[r][c].no.has(n) ? n : ""}</i>`).join("")}</span>`;
     else button.textContent = here || "";
     if (selected && (r === selected[0] || c === selected[1] || box(r, c) === box(...selected))) button.classList.add("peer");
     if (selected && r === selected[0] && c === selected[1]) button.classList.add("selected");
@@ -76,14 +76,14 @@ function render() {
     button.disabled = full;
   });
 }
-function snapshot() { history.push(JSON.stringify({boardState, notes:[...notes.map(row => row.map(set => [...set]))]})); if (history.length > 80) history.shift(); }
+function snapshot() { history.push(JSON.stringify({boardState, notes:notes.map(row => row.map(cell => ({yes:[...cell.yes], no:[...cell.no]})))})); if (history.length > 80) history.shift(); }
 function place(n) {
   if (n && boardState.flat().filter(value => value === n).length === 9) return;
   if (!selected || done || puzzle[selected[0]][selected[1]]) { picked = n; render(); return; }
   if (noteMode && n) { picked = n; writeNote(); return; }
   const [r, c] = selected;
   snapshot();
-  boardState[r][c] = n; notes[r][c].clear(); picked = n;
+  boardState[r][c] = n; notes[r][c] = {yes:new Set(), no:new Set()}; picked = n;
   reveal = false;
   const fresh = [["r" + r, lineComplete(r, true)], ["c" + c, lineComplete(c, false)]];
   fresh.forEach(([key, complete]) => { if (complete) litLines.add(key); });
@@ -97,7 +97,9 @@ function place(n) {
 function undo() {
   const previous = history.pop(); if (!previous || done) return;
   const state = JSON.parse(previous); boardState = state.boardState;
-  notes = state.notes.map(row => row.map(values => new Set(values))); render();
+  notes = state.notes.map(row => row.map(cell => ({yes:new Set(cell.yes), no:new Set(cell.no)})));
+  document.getElementById("hint").textContent = "رجعت آخر حركة، والملاحظات رجعت معاها.";
+  render();
 }
 function win() {
   done = true; finished++; clearInterval(clock); finishSound();
@@ -129,25 +131,35 @@ document.getElementById("erase").onclick = () => place(0);
 document.getElementById("undo").onclick = undo;
 document.getElementById("check").onclick = inspectBoard;
 function toggleNotes() {
-  noteMode = !noteMode;
+  noteMode = !noteMode; if (noteMode) forbidMode = false;
+  document.getElementById("forbid").classList.remove("on");
   document.getElementById("notes").classList.toggle("on", noteMode);
-  document.getElementById("notes").setAttribute("aria-pressed", noteMode);
   document.getElementById("hint").textContent = noteMode ? "الملاحظات شغالة." : "رجعت للرقم الكامل.";
+}
+function toggleForbid() {
+  forbidMode = !forbidMode; if (forbidMode) noteMode = false;
+  document.getElementById("notes").classList.remove("on");
+  document.getElementById("forbid").classList.toggle("on", forbidMode);
+  document.getElementById("hint").textContent = forbidMode ? "الرقم هيتشطب كممنوع." : "رجعت للرقم الكامل.";
 }
 function writeNote() {
   if (!selected || done || puzzle[selected[0]][selected[1]] || !picked) { document.getElementById("hint").textContent = "اختار خانة ورقم الأول."; return; }
   const [r, c] = selected; snapshot();
-  if (boardState[r][c]) notes[r][c].add(boardState[r][c]);
-  notes[r][c].has(picked) ? notes[r][c].delete(picked) : notes[r][c].add(picked);
+  const keep = forbidMode ? notes[r][c].no : notes[r][c].yes;
+  const other = forbidMode ? notes[r][c].yes : notes[r][c].no;
+  if (boardState[r][c]) notes[r][c].yes.add(boardState[r][c]);
+  other.delete(picked);
+  keep.has(picked) ? keep.delete(picked) : keep.add(picked);
   boardState[r][c] = 0;
-  document.getElementById("hint").textContent = "الملاحظات الصغيرة اتضافت.";
+  document.getElementById("hint").textContent = forbidMode ? "الرقم اتعلم كممنوع." : "الملاحظة اتضافت.";
   tapSound(); render();
 }
 document.getElementById("notes").onclick = toggleNotes;
+document.getElementById("forbid").onclick = toggleForbid;
 document.getElementById("clear-notes").onclick = () => {
-  if (done || !notes.some(row => row.some(set => set.size))) return;
+  if (done || !notes.some(row => row.some(cell => cell.yes.size || cell.no.size))) return;
   snapshot();
-  notes.forEach(row => row.forEach(set => set.clear()));
+  notes.forEach(row => row.forEach(cell => { cell.yes.clear(); cell.no.clear(); }));
   document.getElementById("hint").textContent = "كل الملاحظات اتمسحت.";
   render();
 };
