@@ -104,7 +104,9 @@ function undo() {
 function win() {
   done = true; finished++; clearInterval(clock); finishSound();
   document.getElementById("win-time").textContent = `الوقت ${document.getElementById("timer").textContent} · خلّصت ${ar(finished)} في الجلسة`;
-  document.getElementById("mini-board").innerHTML = boardState.flat().map(value => `<i>${value}</i>`).join("");
+  document.getElementById("mini-board").innerHTML = boardState.flat().map((value, index) => `<i class="r${(index / 9 | 0) + 1} c${index % 9 + 1}">${value}</i>`).join("");
+  const confetti = document.getElementById("confetti");
+  confetti.innerHTML = Array.from({length:26}, (_, index) => `<b style="--x:${8 + (index * 37) % 86}%;--d:${index % 7 * .08}s;--r:${index % 2 ? 1 : -1}"></b>`).join("");
   document.getElementById("veil").classList.add("on");
 }
 function inspectBoard() {

@@ -37,5 +37,14 @@ h1 { margin:0; font-size:22px; line-height:1; } .eyebrow,.status span { color:va
 .veil { position:fixed; inset:0; background:rgba(47,36,24,.28); display:none; align-items:end; justify-content:center; } .veil.on { display:flex; }
 .sheet { width:min(430px,100%); background:#fffaf3; border-radius:28px 28px 0 0; padding:18px; } .sheet h2,.sheet .lead { text-align:center; }
 .seal { width:52px; height:52px; margin:auto; border-radius:18px; background:#f4e7d3; display:grid; place-items:center; } .play { width:100%; min-height:46px; border-radius:16px; background:var(--clay); color:white; font-weight:750; }
-.mini-board { width:150px; margin:10px auto; display:grid; grid-template-columns:repeat(9,1fr); border:2px solid #6e5b47; } .mini-board i { aspect-ratio:1; background:#fffdf9; font-style:normal; display:grid; place-items:center; font-size:7px; }
+.roof { margin:6px 0 0; text-align:center; color:#a65332; font-weight:800; letter-spacing:.5px; }
+.sheet { animation:rise .42s cubic-bezier(.2,1.2,.3,1); } @keyframes rise { from { transform:translateY(28px); } }
+.confetti { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.confetti b { position:absolute; top:-12px; left:var(--x); width:8px; height:12px; border-radius:3px; background:#c46a45; animation:burst 1.35s var(--d) ease-in forwards; }
+.confetti b:nth-child(3n) { background:#e2b15a; height:8px; } .confetti b:nth-child(4n) { background:#6f7d52; width:6px; }
+@keyframes burst { to { transform:translateY(108dvh) rotate(calc(var(--r) * 260deg)); opacity:.2; } }
+.mini-board { width:180px; height:180px; margin:12px auto; display:grid; grid-template-columns:repeat(9,1fr); grid-template-rows:repeat(9,1fr); border:2px solid #6e5b47; background:#efe4d4; position:relative; z-index:1; }
+.mini-board i { min-width:0; min-height:0; background:#fffdf9; font-style:normal; display:grid; place-items:center; font-size:8px; border-inline-end:.5px solid #efe4d4; border-bottom:.5px solid #efe4d4; }
+.mini-board i.c9 { border-inline-end:0; } .mini-board i.r9 { border-bottom:0; }
+.mini-board i.r3,.mini-board i.r6 { border-bottom:2px solid #6e5b47; } .mini-board i.c3,.mini-board i.c6 { border-inline-end:2px solid #6e5b47; }
 @media (max-height:760px) { .hint { display:none; } #notes,.actions button,.num { min-height:34px; } .top { margin-bottom:4px; } }
