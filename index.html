@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3eadb">
+<title>شبكة</title>
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
+<main class="phone">
+  <header class="top">
+    <div class="brand"><div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div><h1>شبكة</h1><p class="eyebrow" id="crumb">اختار مستوى</p></div></div>
+    <div class="tools"><button class="back" id="back" hidden aria-label="رجوع">‹</button><button class="sound" id="sound" aria-label="كتم الصوت">♪</button></div>
+  </header>
+  <section class="screen on" id="levels">
+    <div class="hero"><span class="chip">شبكة</span><h2>اختار مستوى وابدأ.</h2><p>كل مستوى له حل واحد.</p></div>
+    <div class="levels" id="levels-list"></div>
+    <p class="session" id="session"></p>
+  </section>
+  <section class="screen" id="play">
+    <div class="status"><strong id="level-name">سهل</strong><span id="timer">٠٠:٠٠</span><button id="check">افحص · ٣</button></div>
+    <div class="board-wrap"><div class="board" id="board"></div></div>
+    <p class="hint" id="hint">اختار خانة، وبعدين رقم.</p>
+    <div class="note-row"><button id="notes">ملاحظات</button><button id="clear-notes">امسح الملاحظات</button></div>
+    <div class="actions"><button id="undo">رجوع</button><button id="erase">مسح</button></div>
+    <div class="pad" id="pad"></div>
+  </section>
+</main>
+<div class="veil" id="veil"><div class="sheet"><div class="seal">✦</div><h2>الشبكة اتقفلت</h2><p class="lead" id="win-time"></p><div class="mini-board" id="mini-board"></div><button class="play" id="again">لغز جديد</button></div></div>
+<script src="levels.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
