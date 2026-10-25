@@ -4,7 +4,6 @@ I18n.add("ar", {
   strings: {
     "nav.chooseLevel": "اختر مستوى",
     "nav.back": "رجوع",
-    "nav.language": "اللغة",
     "sound.mute": "كتم الصوت",
     "sound.unmute": "تشغيل الصوت",
 
@@ -15,6 +14,8 @@ I18n.add("ar", {
       zero: "لا توجد مستويات مفتوحة الآن.", one: "مستوى واحد مفتوح الآن.", two: "مستويان مفتوحان الآن.",
       few: "{count} مستويات مفتوحة الآن.", many: "{count} مستوى مفتوحًا الآن.", other: "{count} مستوى مفتوح الآن."
     },
+    "home.continue": "أكمل",
+    "home.continueDetail": "{level} · {time}",
     "home.finished": {
       one: "أنهيت لغزًا واحدًا في هذه الجلسة.", two: "أنهيت لغزين في هذه الجلسة.",
       few: "أنهيت {count} ألغاز في هذه الجلسة.", many: "أنهيت {count} لغزًا في هذه الجلسة.", other: "أنهيت {count} لغز في هذه الجلسة."
@@ -40,7 +41,10 @@ I18n.add("ar", {
     "play.undo": "تراجع",
     "play.clearNotes": "امسح الملاحظات",
     "play.erase": "مسح",
-    "play.cell": "صف {row}، عمود {col}",
+    "play.cellEmpty": "صف {row}، عمود {col}، فارغة",
+    "play.cellValue": "صف {row}، عمود {col}، {value}",
+    "play.cellGiven": "صف {row}، عمود {col}، {value}، ثابت",
+    "play.cellWrong": "{label}، خطأ",
 
     "hint.start": "اختر خانة، ثم رقمًا.",
     "hint.undo": "تم التراجع عن آخر حركة مع ملاحظاتها.",
@@ -61,6 +65,18 @@ I18n.add("ar", {
     "win.roof": "تسقيف",
     "win.title": "الشبكة اتقفلت",
     "win.time": "الوقت {time}",
-    "win.again": "لغز جديد"
+    "win.again": "لغز جديد",
+    "win.levels": "كل المستويات",
+
+    "settings.title": "الإعدادات",
+    "settings.language": "اللغة",
+    "settings.sound": "الصوت",
+    "settings.vibration": "الاهتزاز",
+    "settings.vibrationNote": "على الموبايلات التي تدعمه.",
+    "settings.autoNotes": "مسح الملاحظات تلقائيًا",
+    "settings.autoNotesNote": "عند كتابة رقم، يُحذف من ملاحظات نفس الصف والعمود والمربع.",
+    "settings.showMistakes": "إظهار الأخطاء فورًا",
+    "settings.showMistakesNote": "عند إيقافه، تظهر الأخطاء فقط عند استخدام الفحص.",
+    "settings.keyboard": "الكيبورد: الأسهم للتنقل، 1–9 للكتابة، Backspace للمسح، N للملاحظات، X للممنوع، Z للتراجع."
   }
 });

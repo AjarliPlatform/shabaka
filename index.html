@@ -13,10 +13,11 @@
 <main class="phone">
   <header class="top">
     <div class="brand"><div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div><h1 dir="ltr">Nineling</h1><p class="eyebrow" id="crumb"></p></div></div>
-    <div class="tools"><select id="lang" data-i18n-aria="nav.language"></select><button class="back" id="back" hidden data-i18n-aria="nav.back">‹</button><button class="sound" id="sound">♪</button></div>
+    <div class="tools"><button class="back" id="back" hidden data-i18n-aria="nav.back">‹</button><button class="sound" id="sound">♪</button><button class="gear" id="gear" data-i18n-aria="settings.title">⚙</button></div>
   </header>
   <section class="screen on" id="levels">
     <div class="hero"><span class="chip" data-i18n="home.chip"></span><h2 data-i18n="home.title"></h2><p data-i18n="home.sub"></p></div>
+    <button class="continue" id="continue" hidden><span><b data-i18n="home.continue"></b><small id="continue-detail"></small></span><span aria-hidden="true">›</span></button>
     <div class="levels" id="levels-list"></div>
     <p class="session" id="session"></p>
   </section>
@@ -28,8 +29,18 @@
     <div class="actions"><button id="undo" data-i18n="play.undo"></button><button id="clear-notes" data-i18n="play.clearNotes"></button><button id="erase" data-i18n="play.erase"></button></div>
     <div class="pad" id="pad" dir="ltr"></div>
   </section>
+  <section class="screen" id="settings">
+    <div class="settings">
+      <label class="setting" for="lang"><span><b data-i18n="settings.language"></b></span><select id="lang"></select></label>
+      <label class="setting" for="set-sound"><span><b data-i18n="settings.sound"></b></span><input type="checkbox" role="switch" id="set-sound"></label>
+      <label class="setting" for="set-vibration"><span><b data-i18n="settings.vibration"></b><small data-i18n="settings.vibrationNote"></small></span><input type="checkbox" role="switch" id="set-vibration"></label>
+      <label class="setting" for="set-autoNotes"><span><b data-i18n="settings.autoNotes"></b><small data-i18n="settings.autoNotesNote"></small></span><input type="checkbox" role="switch" id="set-autoNotes"></label>
+      <label class="setting" for="set-showMistakes"><span><b data-i18n="settings.showMistakes"></b><small data-i18n="settings.showMistakesNote"></small></span><input type="checkbox" role="switch" id="set-showMistakes"></label>
+    </div>
+    <p class="keys" data-i18n="settings.keyboard"></p>
+  </section>
 </main>
-<div class="veil" id="veil"><div class="confetti" id="confetti" aria-hidden="true"></div><div class="sheet"><div class="seal">✦</div><p class="roof" data-i18n="win.roof"></p><h2 data-i18n="win.title"></h2><p class="lead" id="win-time"></p><div class="mini-board" id="mini-board" dir="ltr"></div><button class="play" id="again" data-i18n="win.again"></button></div></div>
+<div class="veil" id="veil"><div class="confetti" id="confetti" aria-hidden="true"></div><div class="sheet"><div class="seal">✦</div><p class="roof" data-i18n="win.roof"></p><h2 data-i18n="win.title"></h2><p class="lead" id="win-time"></p><div class="mini-board" id="mini-board" dir="ltr"></div><button class="play" id="again" data-i18n="win.again"></button><button class="ghost" id="to-levels" data-i18n="win.levels"></button></div></div>
 <script src="js/i18n.js"></script>
 <script src="locales/en.js"></script>
 <script src="locales/ar.js"></script>

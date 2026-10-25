@@ -1,12 +1,12 @@
 :root { --ink:#2b241c; --muted:#7a6d5d; --card:#fffaf3; --line:#e4d7c4; --clay:#c46a45; --shadow:0 14px 34px rgba(74,52,30,.10); }
-* { box-sizing:border-box; } html,body { margin:0; height:100%; overflow:hidden; }
+* { box-sizing:border-box; } [hidden] { display:none !important; } html,body { margin:0; height:100%; overflow:hidden; }
 body { font-family:"Baloo 2","Baloo Bhaijaan 2",system-ui,"Segoe UI",Tahoma,sans-serif; color:var(--ink); background:linear-gradient(160deg,#f8f2e7,#efe3d1); }
 button,.cell { font:inherit; } button { touch-action:manipulation; border:0; background:none; color:inherit; cursor:pointer; }
 .phone { width:min(430px,100%); height:100dvh; margin:auto; padding:8px 10px 8px; overflow:hidden; display:flex; flex-direction:column; }
 .top,.status,.tools,.brand { display:flex; align-items:center; } .top,.status { justify-content:space-between; } .brand,.tools { gap:8px; }
-.top { margin-bottom:6px; } [dir="rtl"] .back { transform:scaleX(-1); }
+.top { margin-bottom:6px; }
 #lang { height:34px; max-width:96px; border-radius:12px; background:#fff8ee; border:1px solid var(--line); color:inherit; font:inherit; font-size:12px; padding:0 6px; }
-.mark,.back,.sound { width:34px; height:34px; border-radius:12px; background:#fff8ee; border:1px solid var(--line); }
+.mark,.back,.sound,.gear { width:34px; height:34px; border-radius:12px; background:#fff8ee; border:1px solid var(--line); }
 .mark { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:6px; } .mark i { border-radius:2px; background:#d7c4aa; }
 .mark i:nth-child(1),.mark i:nth-child(5),.mark i:nth-child(9) { background:var(--clay); }
 h1 { margin:0; font-size:22px; line-height:1; } .eyebrow,.status span { color:var(--muted); font-size:11px; white-space:nowrap; }
@@ -51,3 +51,20 @@ h1 { margin:0; font-size:22px; line-height:1; } .eyebrow,.status span { color:va
 .mini-board i.c9 { border-inline-end:0; } .mini-board i.r9 { border-bottom:0; }
 .mini-board i.r3,.mini-board i.r6 { border-bottom:2px solid #6e5b47; } .mini-board i.c3,.mini-board i.c6 { border-inline-end:2px solid #6e5b47; }
 @media (max-height:760px) { .hint { display:none; } #notes,.actions button,.num { min-height:34px; } .top { margin-bottom:4px; } }
+.gear { font-size:17px; }
+.continue { width:100%; margin-top:10px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; gap:12px; text-align:start; border-radius:18px; background:#a65332; color:white; font-weight:750; }
+.continue > span:first-child { display:grid; } .continue small { opacity:.85; font-weight:600; } .continue > span:last-child { font-size:22px; }
+#settings.on { display:flex; flex-direction:column; gap:10px; overflow:auto; }
+.settings { display:grid; background:var(--card); border:1px solid #eadcc8; border-radius:18px; overflow:hidden; }
+.setting { display:flex; justify-content:space-between; align-items:center; gap:14px; padding:12px 14px; border-bottom:1px solid var(--line); cursor:pointer; }
+.setting:last-child { border-bottom:0; } .setting > span { display:grid; } .setting small { color:var(--muted); font-size:12px; line-height:1.45; }
+.setting select { height:34px; border-radius:10px; border:1px solid var(--line); background:#fff8ee; color:inherit; font:inherit; padding:0 8px; }
+.setting input[type="checkbox"] { appearance:none; flex:none; width:44px; height:26px; border-radius:999px; background:#e4d7c4; position:relative; cursor:pointer; transition:background .15s; }
+.setting input[type="checkbox"]::after { content:""; position:absolute; top:3px; inset-inline-start:3px; width:20px; height:20px; border-radius:50%; background:white; box-shadow:0 1px 3px rgba(0,0,0,.2); transition:inset-inline-start .15s; }
+.setting input[type="checkbox"]:checked { background:var(--clay); } .setting input[type="checkbox"]:checked::after { inset-inline-start:21px; }
+.keys { margin:0; color:var(--muted); font-size:12px; line-height:1.6; }
+.ghost { width:100%; min-height:40px; margin-top:6px; border-radius:16px; color:#a65332; font-weight:750; }
+.bad { text-decoration:underline wavy #b33b32; text-underline-offset:3px; }
+button:focus-visible,select:focus-visible,input:focus-visible { outline:2.5px solid #2b6cb0; outline-offset:2px; }
+.cell:focus-visible { outline:2.5px solid #2b6cb0; outline-offset:-3px; z-index:4; }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } }

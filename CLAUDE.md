@@ -8,4 +8,5 @@ Sudoku game in plain HTML, CSS and JavaScript with no build step. Open `index.ht
 - Never put user-facing text in `index.html` or `js/`; add a key to every file in `locales/`. A test enforces this.
 - The board and number pad stay `dir="ltr"` with digits 1–9 in every language.
 - Every puzzle in `js/levels.js` must have a valid solution and exactly one solution.
-- Run `npm test` before every push (needs Playwright with Chromium for `tests/ui.test.js`).
+- Run `npm install` once, then `npm test` before every push (`tests/ui.test.js` needs Chromium for Playwright).
+- Saved data lives in `localStorage` under `nineling.lang`, `nineling.settings` and `nineling.game`. Bump the `v` field in the saved game if its shape changes.

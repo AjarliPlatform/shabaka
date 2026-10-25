@@ -56,7 +56,38 @@
     return true;
   }
 
-  const Sudoku = { box, clues, countOf, isFull, matches, lineComplete, wrongCount, canPlace, countSolutions, isValidSolution };
+  // Seeded random numbers, so a seed always gives the same puzzle (needed for the daily puzzle).
+  function random(seed) {
+    return function () {
+      seed = seed + 0x6D2B79F5 | 0;
+      let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  function shuffled(items, rand) {
+    const out = items.slice();
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [out[i], out[j]] = [out[j], out[i]];
+    }
+    return out;
+  }
+
+  // A new puzzle from an existing one: relabel digits, shuffle bands, stacks and the lines
+  // inside them, and maybe transpose. Every step keeps the rules, the difficulty and the
+  // single solution intact.
+  function variant(puzzle, solution, seed) {
+    const rand = random(seed);
+    const digits = [0, ...shuffled([1, 2, 3, 4, 5, 6, 7, 8, 9], rand)];
+    const lines = () => shuffled([0, 1, 2], rand).flatMap(group => shuffled([0, 1, 2], rand).map(i => group * 3 + i));
+    const rows = lines(), cols = lines(), transpose = rand() < .5;
+    const map = grid => rows.map(r => cols.map(c => digits[transpose ? grid[c][r] : grid[r][c]]));
+    return { puzzle: map(puzzle), solution: map(solution) };
+  }
+
+  const Sudoku = { box, clues, countOf, isFull, matches, lineComplete, wrongCount, canPlace, countSolutions, isValidSolution, random, variant };
   root.Sudoku = Sudoku;
   if (typeof module !== "undefined") module.exports = Sudoku;
 })(typeof window !== "undefined" ? window : globalThis);

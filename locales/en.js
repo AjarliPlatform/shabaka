@@ -3,7 +3,6 @@ I18n.add("en", {
   strings: {
     "nav.chooseLevel": "Choose a level",
     "nav.back": "Back",
-    "nav.language": "Language",
     "sound.mute": "Mute sound",
     "sound.unmute": "Turn sound on",
 
@@ -11,6 +10,8 @@ I18n.add("en", {
     "home.title": "Pick a level and start.",
     "home.sub": "Every puzzle has exactly one solution.",
     "home.openCount": { one: "1 level open now.", other: "{count} levels open now." },
+    "home.continue": "Continue",
+    "home.continueDetail": "{level} · {time}",
     "home.finished": { one: "You finished 1 puzzle this session.", other: "You finished {count} puzzles this session." },
 
     "level.easy": "Easy",
@@ -31,7 +32,10 @@ I18n.add("en", {
     "play.undo": "Undo",
     "play.clearNotes": "Clear notes",
     "play.erase": "Erase",
-    "play.cell": "Row {row}, column {col}",
+    "play.cellEmpty": "Row {row}, column {col}, empty",
+    "play.cellValue": "Row {row}, column {col}, {value}",
+    "play.cellGiven": "Row {row}, column {col}, {value}, given",
+    "play.cellWrong": "{label}, wrong",
 
     "hint.start": "Pick a cell, then a number.",
     "hint.undo": "Last move undone, notes included.",
@@ -49,6 +53,18 @@ I18n.add("en", {
     "win.roof": "Bravo!",
     "win.title": "Grid complete.",
     "win.time": "Time {time}",
-    "win.again": "New puzzle"
+    "win.again": "New puzzle",
+    "win.levels": "All levels",
+
+    "settings.title": "Settings",
+    "settings.language": "Language",
+    "settings.sound": "Sound",
+    "settings.vibration": "Vibration",
+    "settings.vibrationNote": "On phones that support it.",
+    "settings.autoNotes": "Remove notes automatically",
+    "settings.autoNotesNote": "Placing a number removes it from notes in the same row, column and box.",
+    "settings.showMistakes": "Show mistakes right away",
+    "settings.showMistakesNote": "When off, mistakes only show when you use a check.",
+    "settings.keyboard": "Keyboard: arrows move, 1–9 write, Backspace erases, N notes, X not here, Z undo."
   }
 });
