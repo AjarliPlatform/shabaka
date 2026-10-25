@@ -1,0 +1,314 @@
+<title>Nineling Brand Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Baloo+Bhaijaan+2:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: one calm reading column; the board mockups and the nine characters are the only loud moments. */
+:root {
+  --paper:#F7F4FB; --surface:#FFFFFF; --ink:#2B1846; --ink-soft:#6B5B85; --line:#E4DCEF;
+  --accent:#FFB82E; --tint:#EEE7F8; --same:#FFF0CC; --lit:#E3F8F2; --given:#2B1846; --typed:#6C4FD8;
+  --plum:#2B1846; --plum-2:#47306B;
+  --d1:#FF6B5B; --d2:#FF9F1C; --d3:#FFC93C; --d4:#8BD448; --d5:#2EC4A6; --d6:#3BA7F0; --d7:#6C63FF; --d8:#B05CE6; --d9:#F25C9A;
+  --display:"Baloo 2","Baloo Bhaijaan 2",system-ui,sans-serif;
+  --body:"Baloo Bhaijaan 2","Baloo 2",system-ui,"Segoe UI",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper:#150D22; --surface:#20152F; --ink:#F2ECFA; --ink-soft:#B3A6C7; --line:#33264A;
+  --accent:#FFC24D; --tint:#2A1D3E; --same:#4A3A1A; --lit:#173A36; --given:#F2ECFA; --typed:#A99BFF; color-scheme:dark } }
+:root[data-theme="dark"] {
+  --paper:#150D22; --surface:#20152F; --ink:#F2ECFA; --ink-soft:#B3A6C7; --line:#33264A;
+  --accent:#FFC24D; --tint:#2A1D3E; --same:#4A3A1A; --lit:#173A36; --given:#F2ECFA; --typed:#A99BFF; color-scheme:dark }
+
+* { box-sizing:border-box; }
+body { background:var(--paper); color:var(--ink); font-family:var(--body); font-size:16.5px; line-height:1.7; }
+.wrap { max-width:1000px; margin:0 auto; padding-block:28px 64px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); display:grid; gap:56px; }
+h1,h2,h3 { font-family:var(--display); line-height:1.15; margin:0; text-wrap:balance; }
+h2 { font-size:clamp(24px,4vw,32px); font-weight:800; }
+h3 { font-size:19px; font-weight:700; }
+p { margin:0; max-width:65ch; }
+.eyebrow { font-size:13px; font-weight:700; letter-spacing:.06em; color:var(--ink-soft); }
+section { display:grid; gap:18px; }
+.en { direction:ltr; unicode-bidi:isolate; font-family:"Baloo 2",system-ui,sans-serif; }
+.muted { color:var(--ink-soft); }
+
+/* hero */
+.hero { display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:center; }
+.hero img { width:156px; height:156px; border-radius:36px; box-shadow:0 18px 40px rgba(43,24,70,.28); }
+.name { font-size:clamp(52px,10vw,96px); font-weight:800; letter-spacing:-.02em; line-height:.95; }
+.say { font-size:18px; color:var(--ink-soft); }
+.tag { font-family:var(--display); font-size:clamp(20px,3vw,26px); font-weight:700; margin-top:6px; }
+.sizes { display:flex; gap:14px; align-items:end; margin-top:14px; flex-wrap:wrap; }
+.hero .sizes img { box-shadow:none; width:var(--s); height:var(--s); }
+.sizes span { font-size:12px; color:var(--ink-soft); }
+@media (max-width:620px) { .hero { grid-template-columns:1fr; } .hero img { width:120px; height:120px; } }
+
+/* tables */
+.table { overflow-x:auto; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+table { border-collapse:collapse; width:100%; min-width:560px; font-size:15px; }
+th,td { padding:10px 14px; text-align:start; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:last-child td { border-bottom:0; }
+th { font-weight:700; color:var(--ink-soft); font-size:13px; }
+tr.ours td { background:var(--tint); font-weight:700; }
+.ok { color:#1F9A80; font-weight:700; } .no { color:#D64545; font-weight:700; }
+
+/* nine characters */
+.crew { display:grid; grid-template-columns:repeat(9,1fr); gap:10px; }
+.ling { display:grid; justify-items:center; gap:4px; text-align:center; }
+.ling svg { width:100%; max-width:84px; height:auto; }
+.ling b { font-family:var(--display); font-size:14px; }
+.ling small { font-size:12px; color:var(--ink-soft); line-height:1.35; }
+@media (max-width:720px) { .crew { grid-template-columns:repeat(5,1fr); } }
+@media (max-width:420px) { .crew { grid-template-columns:repeat(3,1fr); } }
+.bob { animation:bob 2.6s ease-in-out infinite; transform-origin:50% 100%; }
+@keyframes bob { 50% { transform:translateY(-4px) scale(1.02,.98); } }
+@media (prefers-reduced-motion: reduce) { .bob { animation:none; } }
+
+/* palette */
+.compare { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.card { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px; display:grid; gap:12px; min-width:0; }
+.swatches { display:flex; gap:8px; flex-wrap:wrap; }
+.sw { display:grid; gap:4px; font-size:12px; color:var(--ink-soft); text-align:center; width:64px; }
+.sw i { display:block; height:44px; border-radius:12px; border:1px solid var(--line); }
+@media (max-width:720px) { .compare { grid-template-columns:1fr; } }
+
+/* board mockups */
+.boards { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.phone { border-radius:28px; padding:16px; display:grid; gap:10px; min-width:0; }
+.phone.light { background:#F7F4FB; color:#2B1846; border:1px solid #E4DCEF; --b-surface:#fff; --b-line:#E4DCEF; --b-box:#2B1846; --b-tint:#EEE7F8; --b-same:#FFF0CC; --b-lit:#E3F8F2; --b-given:#2B1846; --b-typed:#6C4FD8; --b-soft:#6B5B85; --b-sel:#FFB82E; }
+.phone.dark { background:#150D22; color:#F2ECFA; border:1px solid #33264A; --b-surface:#20152F; --b-line:#33264A; --b-box:#8C77B5; --b-tint:#2A1D3E; --b-same:#4A3A1A; --b-lit:#173A36; --b-given:#F2ECFA; --b-typed:#A99BFF; --b-soft:#B3A6C7; --b-sel:#FFC24D; }
+.phone header { display:flex; justify-content:space-between; align-items:center; font-family:"Baloo 2",sans-serif; direction:ltr; }
+.phone header b { font-size:18px; } .phone header span { font-size:13px; color:var(--b-soft); font-variant-numeric:tabular-nums; }
+.grid { direction:ltr; display:grid; grid-template-columns:repeat(9,1fr); aspect-ratio:1; max-width:100%; border:2.5px solid var(--b-box); border-radius:12px; overflow:hidden; background:var(--b-surface); }
+.grid i { font-style:normal; display:grid; place-items:center; font-family:"Baloo 2",sans-serif; font-weight:700; font-size:clamp(11px,2.2vw,18px); border-right:1px solid var(--b-line); border-bottom:1px solid var(--b-line); color:var(--b-typed); position:relative; }
+.grid i.g { color:var(--b-given); }
+.grid i.c3,.grid i.c6 { border-right:2.5px solid var(--b-box); } .grid i.c9 { border-right:0; }
+.grid i.r3,.grid i.r6 { border-bottom:2.5px solid var(--b-box); } .grid i.r9 { border-bottom:0; }
+.grid i.peer { background:var(--b-tint); } .grid i.lit { background:var(--b-lit); }
+.grid i.same { background:var(--b-same); }
+.grid i.sel { background:var(--b-same); box-shadow:inset 0 0 0 2.5px var(--b-sel); }
+.pad { direction:ltr; display:grid; grid-template-columns:repeat(9,1fr); gap:4px; }
+.pad span { display:grid; place-items:center; height:38px; border-radius:10px; font-family:"Baloo 2",sans-serif; font-weight:800; background:var(--b-surface); border:1px solid var(--b-line); position:relative; }
+.pad span::after { content:""; position:absolute; bottom:5px; width:12px; height:3px; border-radius:2px; background:var(--dc); }
+.pad span.on { background:var(--b-sel); color:#2B1846; border-color:transparent; }
+.cap { font-size:13px; color:var(--b-soft); }
+@media (max-width:720px) { .boards { grid-template-columns:1fr; } }
+
+/* type */
+.type { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.type .card div { font-family:var(--display); font-size:28px; font-weight:800; line-height:1.2; }
+@media (max-width:720px) { .type { grid-template-columns:1fr; } }
+
+/* store copy */
+.copy { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.copy .card p { max-width:none; }
+.copy ul { margin:0; padding-inline-start:20px; }
+@media (max-width:720px) { .copy { grid-template-columns:1fr; } }
+.note { border-inline-start:4px solid var(--accent); padding:10px 16px; background:var(--surface); border-radius:0 12px 12px 0; }
+</style>
+
+<div class="wrap" dir="rtl" lang="ar">
+
+  <section class="hero">
+    <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='232' fill='%232B1846'/%3E%3Cg fill='%2347306B'%3E%3Crect x='152' y='152' width='216' height='216' rx='56'/%3E%3Crect x='404' y='152' width='216' height='216' rx='56'/%3E%3Crect x='656' y='152' width='216' height='216' rx='56'/%3E%3Crect x='152' y='404' width='216' height='216' rx='56'/%3E%3Crect x='656' y='404' width='216' height='216' rx='56'/%3E%3Crect x='152' y='656' width='216' height='216' rx='56'/%3E%3Crect x='404' y='656' width='216' height='216' rx='56'/%3E%3C/g%3E%3Crect x='656' y='656' width='216' height='216' rx='56' fill='%232EC4A6'/%3E%3Crect x='404' y='404' width='216' height='216' rx='56' fill='%23FFB82E'/%3E%3Ccircle cx='470' cy='492' r='30' fill='%23fff'/%3E%3Ccircle cx='554' cy='492' r='30' fill='%23fff'/%3E%3Ccircle cx='478' cy='498' r='15' fill='%232B1846'/%3E%3Ccircle cx='562' cy='498' r='15' fill='%232B1846'/%3E%3Cpath d='M478 556 Q512 582 546 556' fill='none' stroke='%232B1846' stroke-width='16' stroke-linecap='round'/%3E%3C/svg%3E" alt="أيقونة Nineling" id="icon">
+    <div>
+      <p class="eyebrow">الاسم المقترح للعبة</p>
+      <h1 class="name en">Nineling</h1>
+      <p class="say">بيتنطق <b>ناين-لينج</b>، يعني "التسعاية الصغيرة"</p>
+      <p class="tag en">Nine little numbers. One perfect grid.</p>
+      <div class="sizes" aria-label="الأيقونة بأحجام مختلفة">
+        <span><img data-icon style="--s:64px;border-radius:15px" alt=""><br>شاشة الموبايل</span>
+        <span><img data-icon style="--s:32px;border-radius:8px" alt=""><br>الإشعارات</span>
+        <span><img data-icon style="--s:16px;border-radius:4px" alt=""><br>تاب المتصفح</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">ليه الاسم ده</p>
+    <h2>المنافسين كلهم اسمهم "Sudoku"، واحنا عايزين اسم يتفتكر</h2>
+    <p>أكبر تطبيقات سودوكو اسمها حرفيًا "Sudoku" أو "Sudoku.com". ده بيجيب بحث، بس مفيش حد بيفتكر مين فيهم اللي لعبه. احنا هناخد الاتنين: اسم مميز يتفتكر، وجنبه كلمة Sudoku في اسم المتجر عشان البحث.</p>
+    <div class="table">
+      <table>
+        <thead><tr><th>اللعبة</th><th>الاسم</th><th>الشكل</th><th>بتتميز بإيه</th></tr></thead>
+        <tbody>
+          <tr><td class="en">Sudoku.com (Easybrain)</td><td>اسم عام</td><td>أبيض وأزرق</td><td>بسيطة، وتحديات يومية وميداليات</td></tr>
+          <tr><td class="en">Sudoku (Tripledot)</td><td>اسم عام</td><td>أبيض وأزرق</td><td>الأساسيات كلها، حفظ تلقائي وتلميحات</td></tr>
+          <tr><td class="en">Good Sudoku</td><td>نص عام</td><td>ألوان باستيل</td><td>تلميحات بتعلّم التقنيات</td></tr>
+          <tr><td class="en">NYT Games Sudoku</td><td>اسم الجريدة</td><td>أبيض وأسود</td><td>ثقة البراند</td></tr>
+          <tr class="ours"><td class="en">Nineling</td><td>اسم مميز وليه شخصية</td><td>بنفسجي غامق وأصفر</td><td>٩ شخصيات بتتفاعل معاك، وأي لغة</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">اسم المتجر هيبقى <b class="en">Nineling: Sudoku Puzzles</b>.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">اتأكدت النهارده</p>
+    <h2>الاسم فاضي</h2>
+    <div class="table">
+      <table>
+        <thead><tr><th>الاسم</th><th>دومينات</th><th>لعبة بنفس الاسم</th><th>رأيي</th></tr></thead>
+        <tbody>
+          <tr class="ours"><td class="en">Nineling</td><td class="en"><span class="ok">nineling.com ✓</span> · <span class="ok">nineling.app ✓</span> · <span class="ok">nineling.games ✓</span></td><td>مالقيتش</td><td>الأول. الـ ‎.com‎ فاضي، وده نادر لاسم من كلمتين قصيرين</td></tr>
+          <tr><td class="en">Nyne</td><td class="en"><span class="no">nyne.app ✗</span> · <span class="ok">nyne.games ✓</span></td><td>مالقيتش</td><td>قصير وحلو، بس نطقه مش واضح بره الإنجليزي</td></tr>
+          <tr><td class="en">Nineo</td><td class="en"><span class="no">nineo.com ✗</span> · <span class="ok">nineo.games ✓</span></td><td>مالقيتش</td><td>مقبول، بس من غير قصة</td></tr>
+          <tr><td class="en">Kyubo</td><td class="en"><span class="no">kyubo.com ✗</span> · <span class="ok">kyubo.app ✓</span></td><td class="no">فيه لعبة ألغاز على iOS</td><td>مرفوض</td></tr>
+          <tr><td class="en">Nonet</td><td class="en"><span class="no">nonet.app ✗</span></td><td>—</td><td>مرفوض</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">ده بحث مبدئي. قبل الإطلاق لازم نعمل بحث علامة تجارية رسمي، ونحجز الدومين وأسماء السوشيال بدري.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">الفكرة اللي هتفرّقنا</p>
+    <h2>تسع شخصيات، واحدة لكل رقم</h2>
+    <p>كل رقم من ١ لـ ٩ "ناين لينج" صغير، ليه لون وشخصية. وهو ده الإيموشن اللي انت عايزه: لما تقفل كل التسعات، الـ 9 بتاعها يرقص. ولما تقفل صف، الشخصيات اللي فيه تبصلك وتضحك. ومش محتاجة ترجمة، لأن الوش بيتفهم في أي حتة في العالم.</p>
+    <div class="crew" id="crew"></div>
+    <p class="muted">أرقام الشبكة نفسها بتفضل بلون واحد واضح عشان القراية. ألوان الشخصيات بتظهر في الاحتفالات، وفي شَرطة صغيرة تحت كل زرار رقم، وفي الإحصائيات.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">الألوان</p>
+    <h2>نسيب الألوان الحالية؟ رأيي لأ</h2>
+    <p>الألوان الحالية (كريمي مع أحمر طوبي) حلوة، بس بقت منتشرة جدًا في التطبيقات الجديدة، فمش هتفرّقنا. والمنافسين كلهم أبيض وأزرق. اقتراحي بنفسجي غامق للحبر مع أصفر ذهبي: مش موجود عند أي منافس، وبيشتغل بالنهار وبالليل، والشخصيات الملونة بتنور عليه.</p>
+    <div class="compare">
+      <div class="card">
+        <h3>الحالي</h3>
+        <div class="swatches">
+          <div class="sw"><i style="background:#f3eadb"></i>ورق</div>
+          <div class="sw"><i style="background:#2b241c"></i>حبر</div>
+          <div class="sw"><i style="background:#c46a45"></i>طوبي</div>
+          <div class="sw"><i style="background:#e4d7c4"></i>خطوط</div>
+        </div>
+        <p class="muted">دافي ومريح، بس شبه حاجات كتير، ومالوش وضع ليلي.</p>
+      </div>
+      <div class="card">
+        <h3>المقترح</h3>
+        <div class="swatches">
+          <div class="sw"><i style="background:#F7F4FB"></i>ورق</div>
+          <div class="sw"><i style="background:#2B1846"></i>بنفسجي</div>
+          <div class="sw"><i style="background:#FFB82E"></i>ذهبي</div>
+          <div class="sw"><i style="background:#2EC4A6"></i>نعناعي</div>
+          <div class="sw"><i style="background:#150D22"></i>ليل</div>
+        </div>
+        <p class="muted">البنفسجي هو البراند، والذهبي للاختيار والفوز، والنعناعي لما تقفل صف أو مربع.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">شكل اللعبة</p>
+    <h2>نفس اللحظة بالنهار وبالليل</h2>
+    <div class="boards">
+      <div class="phone light"><header><b>Medium</b><span>04:37 · ✓ 3</span></header><div class="grid" data-board></div><div class="pad" data-pad></div><p class="cap" dir="rtl">مختار 8: الصف والعمود والمربع متظللين، وكل الـ 8 متعلمين بالذهبي، والصف الأخير مقفول ومنوّر بالنعناعي.</p></div>
+      <div class="phone dark"><header><b>Medium</b><span>04:37 · ✓ 3</span></header><div class="grid" data-board></div><div class="pad" data-pad></div><p class="cap" dir="rtl">الوضع الليلي: بنفسجي غامق مش أسود، عشان العين ترتاح والألوان تفضل دافية.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">الخط</p>
+    <h2>عيلة خط واحدة لكل اللغات</h2>
+    <p>خط <span class="en">Baloo</span> بيغطي الإنجليزي والعربي والهندي وكتابات تانية كتير بنفس الروح المدوّرة. يعني اللعبة شكلها واحد في كل لغة، ومش بنركّب خطوط ملهاش علاقة ببعض.</p>
+    <div class="type">
+      <div class="card" dir="ltr"><span class="eyebrow en">Latin · Baloo 2</span><div class="en">Row complete!</div></div>
+      <div class="card"><span class="eyebrow en">Arabic · Baloo Bhaijaan 2</span><div style="font-family:'Baloo Bhaijaan 2',sans-serif">عاش يا وحش!</div></div>
+      <div class="card" dir="ltr"><span class="eyebrow en">Devanagari · Baloo 2</span><div style="font-family:'Baloo 2',sans-serif">शाबाश!</div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">وصف المتجر</p>
+    <h2>الكلام اللي هيبيع اللعبة</h2>
+    <div class="copy">
+      <div class="card en" dir="ltr">
+        <h3>Nineling: Sudoku Puzzles</h3>
+        <p><b>Short:</b> Calm Sudoku with nine tiny friends who cheer you on.</p>
+        <p>Nineling is Sudoku with a heartbeat. Nine little characters live in your grid, one for every number, and they celebrate every row, box and digit you complete.</p>
+        <ul>
+          <li>Every puzzle has exactly one solution</li>
+          <li>A new daily puzzle and streaks to keep</li>
+          <li>Hints that teach the technique, not just the answer</li>
+          <li>Notes, "not here" marks and unlimited undo</li>
+          <li>Day and night themes, plays offline</li>
+          <li>Speaks your language</li>
+        </ul>
+      </div>
+      <div class="card" dir="rtl">
+        <h3>Nineling: سودوكو</h3>
+        <p><b>مختصر:</b> سودوكو هادية مع تسع أصحاب صغيرين بيشجعوك.</p>
+        <p>في Nineling، كل رقم شخصية صغيرة عايشة في الشبكة. بتفرح معاك كل ما تقفل صف أو مربع أو تخلّص رقم.</p>
+        <ul>
+          <li>كل لغز ليه حل واحد بس</li>
+          <li>لغز جديد كل يوم وسلسلة أيام تحافظ عليها</li>
+          <li>تلميحات بتعلّمك الطريقة، مش بتقولك الإجابة وخلاص</li>
+          <li>ملاحظات، وعلامة "مش هنا"، وتراجع من غير حدود</li>
+          <li>نهاري وليلي، وشغالة من غير نت</li>
+          <li>بتتكلم لغتك</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">محتاج موافقتك</p>
+    <h2>لو موافق، دي الخطوات الجاية</h2>
+    <div class="table">
+      <table>
+        <thead><tr><th>الخطوة</th><th>مين</th></tr></thead>
+        <tbody>
+          <tr><td>حجز <span class="en">nineling.com</span> و<span class="en">nineling.app</span> (حوالي ١١ دولار في السنة لكل واحد)</td><td>انت</td></tr>
+          <tr><td>حجز اسم <span class="en">@nineling</span> على السوشيال</td><td>انت</td></tr>
+          <tr><td>تغيير الاسم والأيقونة جوه اللعبة، وتحديث الخطة</td><td>أنا</td></tr>
+          <tr><td>الألوان الجديدة والوضع الليلي ورسم الشخصيات التسعة (المرحلتين ٢ و٤)</td><td>أنا</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+const iconSrc = document.getElementById("icon").src;
+document.querySelectorAll("[data-icon]").forEach(img => img.src = iconSrc);
+
+const crew = [
+  ["1","البادئ","دايمًا أول واحد"],["2","التوأم","مش بيمشي لوحده"],["3","الشقي","بيستخبى في الركن"],
+  ["4","الثابت","مربع زي اسمه"],["5","اللي في النص","بيحب الوسط"],["6","الحالم","بيبص لفوق"],
+  ["7","المحظوظ","بيغمز"],["8","النعسان","بيدور ويدوخ"],["9","الكبير","آخر واحد بيخلص"]
+];
+const look = [[-3,-2],[2,0],[-3,2],[0,0],[0,3],[0,-4],[3,-1],[0,2],[-2,0]];
+document.getElementById("crew").innerHTML = crew.map(([n, name, trait], i) => {
+  const [dx, dy] = look[i];
+  const wink = n === "7";
+  const sleepy = n === "8";
+  const eye = (cx) => sleepy
+    ? `<path d="M${cx-9} 38 Q${cx} 44 ${cx+9} 38" stroke="#2B1846" stroke-width="4" fill="none" stroke-linecap="round"/>`
+    : `<circle cx="${cx}" cy="38" r="10" fill="#fff"/><circle cx="${cx+dx}" cy="${38+dy}" r="5" fill="#2B1846"/>`;
+  const right = wink ? `<path d="M55 38 Q64 32 73 38" stroke="#2B1846" stroke-width="4" fill="none" stroke-linecap="round"/>` : eye(64);
+  return `<div class="ling"><svg viewBox="0 0 100 110" aria-hidden="true"><g class="bob" style="animation-delay:${i * .17}s"><rect x="8" y="10" width="84" height="92" rx="30" fill="var(--d${n})"/>${eye(36)}${right}<text x="50" y="92" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="38" fill="#2B1846">${n}</text></g></svg><b>${n} · ${name}</b><small>${trait}</small></div>`;
+}).join("");
+
+const puzzle = [[0,0,0,0,1,0,0,0,9],[0,0,9,4,8,0,0,0,0],[0,0,7,3,0,0,0,6,1],[0,0,0,0,0,0,0,9,3],[5,9,0,0,0,3,1,8,4],[1,0,3,8,0,5,0,0,6],[0,6,0,0,0,1,0,7,0],[0,7,0,5,4,0,0,0,0],[3,0,2,0,7,0,0,1,0]];
+const solution = [[2,3,5,6,1,7,8,4,9],[6,1,9,4,8,2,3,5,7],[4,8,7,3,5,9,2,6,1],[7,2,8,1,6,4,5,9,3],[5,9,6,7,2,3,1,8,4],[1,4,3,8,9,5,7,2,6],[8,6,4,2,3,1,9,7,5],[9,7,1,5,4,8,6,3,2],[3,5,2,9,7,6,4,1,8]];
+const typed = new Set(["0,0","0,1","0,2","0,3","0,5","0,6","0,7","1,0","1,1","2,0","2,1","3,2","3,3","4,2","8,1","8,3","8,5","8,6","8,8","5,4","5,1"]);
+const sel = [2,1];
+document.querySelectorAll("[data-board]").forEach(el => {
+  let html = "";
+  for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) {
+    const given = puzzle[r][c] !== 0;
+    const v = given || typed.has(r + "," + c) ? solution[r][c] : "";
+    const cls = [`r${r + 1}`, `c${c + 1}`];
+    if (given) cls.push("g");
+    if (r === 8) cls.push("lit");
+    if (r === sel[0] || c === sel[1] || ((r / 3 | 0) === (sel[0] / 3 | 0) && (c / 3 | 0) === (sel[1] / 3 | 0))) cls.push("peer");
+    if (v === 8) cls.push("same");
+    if (r === sel[0] && c === sel[1]) cls.push("sel");
+    html += `<i class="${cls.join(" ")}">${v}</i>`;
+  }
+  el.innerHTML = html;
+});
+document.querySelectorAll("[data-pad]").forEach(el => {
+  el.innerHTML = [1,2,3,4,5,6,7,8,9].map(n => `<span class="${n === 8 ? "on" : ""}" style="--dc:var(--d${n})">${n}</span>`).join("");
+});
+</script>

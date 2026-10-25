@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Nineling">
+  <rect width="1024" height="1024" rx="232" fill="#2B1846"/>
+  <g fill="#47306B">
+    <rect x="152" y="152" width="216" height="216" rx="56"/>
+    <rect x="404" y="152" width="216" height="216" rx="56"/>
+    <rect x="656" y="152" width="216" height="216" rx="56"/>
+    <rect x="152" y="404" width="216" height="216" rx="56"/>
+    <rect x="656" y="404" width="216" height="216" rx="56"/>
+    <rect x="152" y="656" width="216" height="216" rx="56"/>
+    <rect x="404" y="656" width="216" height="216" rx="56"/>
+  </g>
+  <rect x="656" y="656" width="216" height="216" rx="56" fill="#2EC4A6"/>
+  <rect x="404" y="404" width="216" height="216" rx="56" fill="#FFB82E"/>
+  <circle cx="470" cy="492" r="30" fill="#fff"/><circle cx="554" cy="492" r="30" fill="#fff"/>
+  <circle cx="478" cy="498" r="15" fill="#2B1846"/><circle cx="562" cy="498" r="15" fill="#2B1846"/>
+  <path d="M478 556 Q512 582 546 556" fill="none" stroke="#2B1846" stroke-width="16" stroke-linecap="round"/>
+</svg>
