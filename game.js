@@ -1,13 +1,15 @@
 const easy = levels[0];
 let level = easy, puzzle, solution, boardState, notes, selected = null, picked = 0;
 let done = false, noteMode = false, forbidMode = false, checks = 3, reveal = false, seconds = 0, clock = null, history = [], finished = 0;
-let litLines = new Set(), muted = false, audio = null;
+let litLines = new Set(), muted = false, audio = null, restartTimer = null;
 const board = document.getElementById("board");
 const ar = value => String(value).padStart(2, "0").replace(/\d/g, digit => "٠١٢٣٤٥٦٧٨٩"[digit]);
 
 function tone(freq, at, length, volume) {
   if (muted) return;
-  audio = audio || new AudioContext();
+  const Context = window.AudioContext || window.webkitAudioContext;
+  if (!Context) return;
+  try { audio = audio || new Context(); } catch { return; }
   const osc = audio.createOscillator(), gain = audio.createGain();
   osc.frequency.value = freq; osc.type = "sine";
   gain.gain.setValueAtTime(volume, audio.currentTime + at);
@@ -31,9 +33,10 @@ function startLevel(next) {
   level = next; puzzle = next.puzzle.map(row => row.slice()); solution = next.solution;
   boardState = puzzle.map(row => row.slice());
   notes = Array.from({length:9}, () => Array.from({length:9}, () => ({yes:new Set(), no:new Set()})));
-  selected = null; picked = 0; done = false; checks = 3; reveal = false; seconds = 0; history = []; litLines = new Set();
+  clearTimeout(restartTimer); selected = null; picked = 0; done = false; checks = 3; reveal = false; seconds = 0; history = []; litLines = new Set();
   clearInterval(clock); clock = setInterval(() => { if (!done) { seconds++; renderStatus(); } }, 1000);
   document.getElementById("level-name").textContent = next.name;
+  document.getElementById("hint").textContent = "اختار خانة، وبعدين رقم.";
   show("play"); render();
 }
 function renderStatus() {
@@ -80,8 +83,9 @@ function snapshot() { history.push(JSON.stringify({boardState, notes:notes.map(r
 function place(n) {
   if (n && boardState.flat().filter(value => value === n).length === 9) return;
   if (!selected || done || puzzle[selected[0]][selected[1]]) { picked = n; render(); return; }
-  if (noteMode && n) { picked = n; writeNote(); return; }
+  if ((noteMode || forbidMode) && n) { picked = n; writeNote(); return; }
   const [r, c] = selected;
+  if (!n && !boardState[r][c] && !notes[r][c].yes.size && !notes[r][c].no.size) return;
   snapshot();
   boardState[r][c] = n; notes[r][c] = {yes:new Set(), no:new Set()}; picked = n;
   reveal = false;
@@ -119,7 +123,7 @@ function inspectBoard() {
 function restartWrong() {
   done = true; clearInterval(clock);
   document.getElementById("hint").textContent = "أنت مخطئ. امسح وابدأ من جديد.";
-  setTimeout(() => startLevel(level), 900);
+  restartTimer = setTimeout(() => startLevel(level), 900);
 }
 function show(name) {
   document.querySelectorAll(".screen").forEach(screen => screen.classList.toggle("on", screen.id === name));
@@ -166,6 +170,6 @@ document.getElementById("clear-notes").onclick = () => {
   render();
 };
 document.getElementById("sound").onclick = () => { muted = !muted; const button = document.getElementById("sound"); button.classList.toggle("off", muted); button.textContent = muted ? "×" : "♪"; button.setAttribute("aria-label", muted ? "تشغيل الصوت" : "كتم الصوت"); };
-document.getElementById("back").onclick = () => show("levels");
+document.getElementById("back").onclick = () => { clearTimeout(restartTimer); clearInterval(clock); done = true; show("levels"); };
 document.getElementById("again").onclick = () => { document.getElementById("veil").classList.remove("on"); renderLevels(); show("levels"); };
 renderLevels();
